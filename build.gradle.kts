@@ -1,6 +1,5 @@
 import java.io.File
 import java.time.LocalDate
-import org.gradle.api.plugins.JavaPluginExtension
 
 plugins {
     `java-library`
@@ -31,16 +30,16 @@ tasks.withType<Javadoc>() {
 
 val generateBuildInfo = tasks.register("generateBuildInfo") {
     group = "build"
-    description = "Генерирует build-info.txt с версией проекта и датой сборки"
 
     val projectVersion = project.version.toString()
-    val outputFile = layout.buildDirectory.file("build-info.txt")
+    val outputFile = layout.projectDirectory.file("build-info.txt")
     outputs.file(outputFile)
 
     doLast {
-        val target: File = outputFile.get().asFile
+        val target: File = outputFile.asFile
         target.parentFile.mkdirs()
-        target.writeText("Version: $projectVersion\nBuild date: ${LocalDate.now()}")
+        target.writeText("Version: $projectVersion\n" +
+                "Build date: ${LocalDate.now()}")
     }
 }
 
