@@ -2,12 +2,10 @@ import java.io.File
 import java.time.LocalDate
 
 plugins {
-    `java-library`
-    `maven-publish`
+    java
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
